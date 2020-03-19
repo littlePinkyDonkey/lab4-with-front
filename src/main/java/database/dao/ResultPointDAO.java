@@ -18,9 +18,14 @@ public class ResultPointDAO {
     }
 
     public ResultPoint insertPoint(ResultPoint point) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(point);
-        entityManager.getTransaction().commit();
+        EntityTransaction tran = entityManager.getTransaction();
+        try{
+            tran.begin();
+            entityManager.persist(point);
+            tran.commit();
+        } catch (Exception e) {
+            tran.rollback();
+        }
         return point;
     }
 
@@ -31,22 +36,5 @@ public class ResultPointDAO {
     public List<ResultPoint> findAllPoints() {
         TypedQuery<ResultPoint> query = entityManager.createQuery("Select e from ResultPoint e", ResultPoint.class);
         return query.getResultList();
-    }
-
-    public void removePoint(String id) {
-        ResultPoint point = findResultPoint(id);
-        if (point != null) {
-            entityManager.getTransaction().begin();
-            entityManager.remove(point);
-            entityManager.getTransaction().commit();
-        }
-    }
-
-    public void clearUserHistory(String userId){
-        for(ResultPoint point : findAllPoints()){
-            if(point.getUserId().equals(userId)){
-                removePoint(point.getId());
-            }
-        }
     }
 }
