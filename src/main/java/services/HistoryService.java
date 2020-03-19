@@ -62,15 +62,4 @@ public class HistoryService {
         }
         return points.toString();
     }
-
-    @POST
-    @Path("clear/{userId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String clearHistory(@PathParam("userId") String userId){
-        ResultPointDAO pointDAO = new ResultPointDAO();
-        pointDAO.clearUserHistory(userId);
-        JSONObject response = new JSONObject();
-        response.put("response", "OK");
-        return response.toString();
-    }
 }
