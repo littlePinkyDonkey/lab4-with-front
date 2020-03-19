@@ -157,7 +157,7 @@ primeng/paginator
 
 primeng/progressspinner
 
-primeng/radiobutton
+primeng/spinner
 
 primeng/table
 

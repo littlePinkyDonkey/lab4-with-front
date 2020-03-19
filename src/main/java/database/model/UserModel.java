@@ -2,10 +2,7 @@ package main.java.database.model;
 
 import main.java.utilities.StringHasher;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
