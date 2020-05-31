@@ -7,10 +7,10 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="eclipselink.target-database" value="PostgreSQL"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://pg/studs" />
-            <property name="javax.persistence.jdbc.user" value="s263229" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres" />
+            <property name="javax.persistence.jdbc.user" value="postgres" />
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-            <property name="javax.persistence.jdbc.password" value="ljc957" />
+            <property name="javax.persistence.jdbc.password" value="ghost270900" />
             <property name="eclipselink.ddl-generation" value="create-tables"/>
         </properties>
     </persistence-unit>

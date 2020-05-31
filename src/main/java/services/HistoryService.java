@@ -3,24 +3,29 @@ package main.java.services;
 import main.java.database.dao.ResultPointDAO;
 import main.java.database.dao.UserModelDAO;
 import main.java.database.model.ResultPoint;
+import main.java.mbeans.areaMBean.Area;
+import main.java.mbeans.pointsMBean.PointsCounter;
 import main.java.utilities.AreaChecker;
 import main.java.utilities.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.ejb.Stateless;
-import javax.json.JsonArray;
+import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
-@Stateless
 @Path("/history")
 public class HistoryService {
+    @EJB
+    private Area areaBean;
+
+    @EJB
+    private PointsCounter pointsCounter;
 
     @POST
     @Path("/c")
@@ -39,6 +44,11 @@ public class HistoryService {
             ResultPointDAO pointDAO = new ResultPointDAO();
 
             pointDAO.insertPoint(resultPoint);
+
+            BigDecimal x = new BigDecimal(resultPoint.getX());
+            BigDecimal y = new BigDecimal(resultPoint.getY());
+            areaBean.addPoint(x,y);
+
             JSONObject response = new JSONObject();
             response.put("response", "OK");
             return response.toString();

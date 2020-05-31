@@ -17,7 +17,6 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
-@Stateless
 @Path("/auth")
 public class AuthService {
     @POST
