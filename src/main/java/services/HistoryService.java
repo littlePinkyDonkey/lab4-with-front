@@ -52,7 +52,7 @@ public class HistoryService {
             JSONObject response = new JSONObject();
             response.put("response", "OK");
             return response.toString();
-        }else{
+        } else {
             JSONObject response = new JSONObject();
             response.put("response", "unknown userId");
             return response.toString();
