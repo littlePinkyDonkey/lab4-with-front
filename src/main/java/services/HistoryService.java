@@ -10,7 +10,10 @@ import main.java.utilities.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
+import javax.validation.ConstraintViolationException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
@@ -48,6 +51,10 @@ public class HistoryService {
             BigDecimal x = new BigDecimal(resultPoint.getX());
             BigDecimal y = new BigDecimal(resultPoint.getY());
             areaBean.addPoint(x,y);
+            pointsCounter.addPointsResult(resultPoint.isEntered());
+
+            if (!resultPoint.isEntered())
+                pointsCounter.sendNotification(resultPoint.getX(), resultPoint.getY(), resultPoint.getR());
 
             JSONObject response = new JSONObject();
             response.put("response", "OK");
